@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: tcvuong
+      WORDPRESS_DB_PASSWORD: 4e21-bcda-6f7d0f950199
+      WORDPRESS_DB_NAME: projectshiping
+    volumes:
+      - wordpress:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: projectshiping
+      MYSQL_USER: tcvuong
+      MYSQL_PASSWORD: 4e21-bcda-6f7d0f950199
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
